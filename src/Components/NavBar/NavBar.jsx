@@ -8,7 +8,7 @@ const NavBar = () => {
                 <button>Nosotros</button>
                 <button>Tienda</button>
             </div>
-            <CartWidget />
+            <CartWidget/>
         </nav>
     )
 }
