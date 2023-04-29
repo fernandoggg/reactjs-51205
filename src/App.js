@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
-import ItemCount from './Components/ItemCount/ItemCount';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
+import ItemCount from './Components/ItemCount/ItemCount';
+
 
 
 function App() {
