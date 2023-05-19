@@ -1,12 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCoffee } from "@fortawesome/free-solid-svg-icons"
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
+import { Link } from "react-router-dom"
 
 const CartWidget = () => {
+    const { totalQuantity } = useContext(CartContext)
+
     return (
-        <div>
+        <Link to='/cart' className="CartWidget" style={{ display: totalQuantity > 0 ? 'block' : 'none'}}>
             <FontAwesomeIcon icon={faCoffee}/>
-            <span>5</span>
-        </div>
+            {/* <span>5</span> */}
+            { totalQuantity }
+        </Link>
     )
 }
 
