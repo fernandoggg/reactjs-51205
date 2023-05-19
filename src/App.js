@@ -1,13 +1,12 @@
-import logo from './logo.svg';
+import "./services/firebase/firebaseConfig"
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
-import ItemCount from './Components/ItemCount/ItemCount';
-import Cart from './Components/'
+import Cart from './Components'
 import { CartProvider } from './context/CartContext'
-import "./services/firebase/firebaseConfig"
+
 
 function App() {
   return (
@@ -23,9 +22,6 @@ function App() {
         <Route path='/checkout' element={<checkout/>}/>
         <Route path='*' element={<h1>404 NOT FOUND</h1>}/>
       </Routes>
-      {/* <ItemListContainer greeting={"Bienvenidos"}/>
-      <ItemCount initial={1} stock={10} onAdd={(quantity) => console.log(`Cantidad agregada`, quantity)}/>
-      <ItemDetailContainer/> */}
       </CartProvider>
       </BrowserRouter>
     </div>
