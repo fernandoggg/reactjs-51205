@@ -4,15 +4,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './Components/ItemDetailContainer/ItemDetailContainer';
-import Cart from './Components'
+import Cart  from './Components/Cart/Cart'
 import { CartProvider } from './context/CartContext'
 
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
       <CartProvider>
+      <BrowserRouter>
       <NavBar/>
       <Routes>
         <Route path='/' element={<ItemListContainer greeting={'Todos nuestros productos'}/>}/>
@@ -22,8 +22,8 @@ function App() {
         <Route path='/checkout' element={<checkout/>}/>
         <Route path='*' element={<h1>404 NOT FOUND</h1>}/>
       </Routes>
-      </CartProvider>
       </BrowserRouter>
+      </CartProvider>
     </div>
   );
 }
