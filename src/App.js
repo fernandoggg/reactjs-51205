@@ -1,5 +1,4 @@
 import "./services/firebase/firebaseConfig"
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import ItemListContainer from './Components/ItemListContainer/ItemListContainer';

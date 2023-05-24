@@ -1,44 +1,52 @@
-import {useState, useEffect } from "react"
-import { getProducts, getProductsByCategory} from '../../asyncMock'
-import ItemList from '../ItemList/ItemList'
-import { useParams } from "react-router-dom"
-import { getDocs, collection, query, where } from 'firebase/firestore'
-import { db } from '../../services/firebase/firebaseConfig'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../services/firebase/firebaseConfig";
+import ItemList from "../ItemList/ItemList";
 
 const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    const {categoryId} = useParams()
+  const { categoryId } = useParams();
 
-    useEffect(() => {
-        setLoading(true)
+  useEffect(() => {
+    setLoading(true);
 
-       const collectionRef = categoryId 
-            ? query(collection(db, 'products'), where('category', '==', categoryId))
-            : collection(db, 'products')
+    const fetchProducts = async () => {
+      try {
+        const collectionRef = categoryId
+          ? query(collection(db, "products"), where("category", "==", categoryId))
+          : collection(db, "products");
 
-        getDocs(collectionRef)
-            .then(response => {
-                const productsAdapted = response.docs.map(doc => {
-                    const data = doc.data()
-                    return { id: doc.id, ...data}
-                })
-                setProducts(productsAdapted)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [categoryId])
-    return (
-        <div>
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
-        </div>
-    )
-}
+        const querySnapshot = await getDocs(collectionRef);
 
-export default ItemListContainer
+        const productsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setProducts(productsData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [categoryId]);
+
+  if (loading) {
+    return <p>Cargando productos...</p>;
+  }
+
+  return (
+    <div>
+      <h1>{greeting}</h1>
+      <ItemList products={products} />
+    </div>
+  );
+};
+
+export default ItemListContainer;
